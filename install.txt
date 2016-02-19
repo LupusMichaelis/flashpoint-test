@@ -13,3 +13,6 @@ flush privileges;
 # Modify your flashpoint/settings.py accordingly to the DB you want to use
 
 python manage.py migrate
+
+# To set up the cronjob, use the provided wrapper:
+* * * * *  /absolute/path/to/project/bin/wrapper.sh update_stats
