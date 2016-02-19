@@ -2,9 +2,10 @@ from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import serializers, status
+from rest_framework import status
 
 from models import Stats
+from serializers import StatSerializer
 
 def index():
     pass
@@ -13,10 +14,10 @@ def index():
 def stat(r):
     try:
         data = Stats.objects.get()
-        serializer = serializers.Serializer(data=data)
-        if serializer.is_valid():
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = StatSerializer(data)
+        payload = {'result': 'success'}
+        payload.update(serializer.data)
+        return Response(payload)
     except Stats.DoesNotExist:
         payload = { 'result':'error', 'error':'Stat unavailable' }
         return Response(payload, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
