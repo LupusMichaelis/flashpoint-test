@@ -11,3 +11,7 @@ class Messages(models.Model):
 
     class Meta:
         ordering = ['state', 'city', 'create_time']
+
+class Stats(models.Model):
+    cities = models.IntegerField('Cities')
+    users = models.IntegerField('Users')
