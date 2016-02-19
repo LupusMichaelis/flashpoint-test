@@ -3,4 +3,13 @@ virtualenv .
 pip install -U pip
 pip install -r requirements.txt
 
+mysql -uroot -p <
+create database flashpoint;
+create user 'flashpoint'@'localhost' identified by '' ;
+grant all privileges on flashpoint.* to 'flashpoint'@'localhost';
+flush privileges;
+^D
 
+# Modify your flashpoint/settings.py accordingly to the DB you want to use
+
+python manage.py migrate
